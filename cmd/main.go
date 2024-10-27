@@ -2,6 +2,7 @@ package main
 
 import (
 	hickmet "hickmet_whatapp_bot"
+	"hickmet_whatapp_bot/api_client"
 	"hickmet_whatapp_bot/internal/handlers"
 	"hickmet_whatapp_bot/internal/repository"
 	"hickmet_whatapp_bot/internal/service"
@@ -36,7 +37,8 @@ func main() {
 	}
 
 	repos := repository.NewRepository(db)
-	service := service.NewService(repos)
+	twilio := api_client.CreateTwilioClient()
+	service := service.NewService(repos, twilio)
 	handler := handlers.NewHandler(service)
 
 	srv := new(hickmet.Server)

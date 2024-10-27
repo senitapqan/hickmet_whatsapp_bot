@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"hickmet_whatapp_bot/internal/handlers/middleware"
 	"hickmet_whatapp_bot/internal/service"
 
 	"github.com/gin-gonic/gin"
@@ -18,9 +19,11 @@ func NewHandler(serv service.Service) *Handler {
 
 func (h *Handler) InitRoutes() *gin.Engine {
 	router := gin.New()
+	router.Use(middleware.CORSMiddleware())
+
 	api := router.Group("/wa/bot")
 	{
-		api.GET("/get_user", h.GetUserByIIN)
+		api.POST("/chat", h.MessageComes)
 	}
 	return router
 }

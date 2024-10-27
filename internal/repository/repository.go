@@ -7,6 +7,8 @@ import (
 
 type Repository interface {
 	GetUserByIIN(iin string) (models.User, error)
+
+	GetSessionByPhone(phone string) (models.Session, error)
 }
 
 type repository struct {

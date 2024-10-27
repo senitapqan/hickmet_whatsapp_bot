@@ -7,14 +7,14 @@ import (
 )
 
 type TwilioClient interface {
-	SendMessage(message string) error
+	SendMessage(message string, phone string) error
 }
 
 type twilioClient struct {
 	client *twilio.RestClient
 }
 
-func createTwilioClient() TwilioClient {
+func CreateTwilioClient() TwilioClient {
 	client := twilio.NewRestClientWithParams(twilio.ClientParams{
 		Username: os.Getenv("TWILIO_ACCOUNT_SID"),
 		Password: os.Getenv("TWILIO_AUTH_TOKEN"),
